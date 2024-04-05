@@ -1,0 +1,84 @@
+<?php
+declare(strict_types=1);
+
+session_start();
+
+
+
+spl_autoload_register(function(string $classNamespace){
+  
+  //dump($classNamespace);
+   
+    $path=str_replace(['\\','APP/'],['/',''],$classNamespace);
+    $path='src/'.$path.'.php';
+    
+    require_once($path);
+});
+
+
+
+
+
+
+require_once("src/utils/debug.php");
+
+//require_once("src/Controller/NoteController.php");
+
+//require_once("src/request.php");
+
+
+$config=require_once("config/config.php");
+
+//require_once('src/Exception/AppException.php');
+use APP\Exception\AppException;
+use APP\Exception\ConfigurationException;
+//use Throwable;
+use APP\Request;
+use APP\Controller\AbstractController;
+
+
+use APP\Controller\MainController;
+use APP\Exception\EmailException;
+
+$request=new Request($_GET,$_POST,$_SERVER,$_SESSION);
+
+try 
+{
+    AbstractController::initConfiguration($config);
+ (new MainController($request))->run();
+ 
+
+}
+catch(ConfigurationException $e)
+{
+    echo "<h1>Wystąpił błąd w aplikacji</h1>";
+    echo '<h3> Problem z konfiguracją proszę skontaktowac sie z adminsitracją</h3>';
+    dump($e);
+}
+catch(EmailException $e)
+{
+    echo "<h1>Wystąpił błąd w wysyłania maila</h1>";
+    dump($e);
+}
+catch(AppException $e)
+{
+    echo "<h1>Wystąpił błąd w aplikacji</h1>";
+    echo '<h3> Sczegóły '.$e->getMessage().'</h3>';
+    dump($e);
+    //echo '<h3> Sczegóły '.$e->getPrevious()->getMessage().'</h3>';
+  
+
+}
+catch(Throwable $e)
+{
+    dump($e);
+   echo "<h1>Wystąpił błąd w aplikacji</h1>";
+}
+
+
+
+
+
+
+
+
