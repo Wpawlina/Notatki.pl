@@ -2,6 +2,7 @@
             <section>
                   <div class="message">
                      <?php
+                     #wyswietlanie wiadomosci i błedów uzytkownikowi
                      if(!empty($params['before']))
                         {
                            switch($params['before']){
@@ -108,7 +109,6 @@
                            <tbody>
                               <?php foreach($params['notes']?? [] as $note):?>
                                  <tr>
-                                    
                                     <td><?=$note['title'] ?></td>
                                     <td><?=$note['created'] ?></td>
                                     <td>

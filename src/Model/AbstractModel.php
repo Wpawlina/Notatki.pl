@@ -13,11 +13,12 @@ use PDO;
 use PDOException;
 use Throwable;
 
-
+#klasa abstractModel zawiera podstawowe metody potrzebne do działania kontrolera bazy danych nastepnie jest rozszerzana o wymagane metody przez NoteModel i UserModel
 abstract class AbstractModel
 {
     protected PDO $conn;
     
+    #konstruktor testuje czy konfiguracja jest poprawna i tworzy połaczenie z bazą danych
     public function __construct(array $config)
     {
        try{
@@ -31,8 +32,8 @@ abstract class AbstractModel
           
         }
     }
-
-    private function createConnection(array $config)
+    #metoda odpowiedzalna za utworzenie i zapisanie w własiwosiciach połaczenia do bazy danych
+    private function createConnection(array $config): void
     {
               
         $dsn="mysql:dbname={$config['database']};host={$config['host']}";
@@ -43,6 +44,8 @@ abstract class AbstractModel
 
         ); 
     }
+
+    #metoda odpowiedzalna za sprawdzenie poprawnosci konfiguracji
     private function validateConfig(array $config ) :void
     {
         if(

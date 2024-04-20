@@ -3,22 +3,7 @@
     <h3>Zarejestruj się</h3>
     <div class="user">
     <div class="message">
-    <?php
     
-        if(!empty($params['error'])) 
-        {
-            switch($params['error']){
-            case 'NotFound':
-              echo "Błędne dane logowania";
-            break;
-            case 'missingUser':
-                echo "Najpierw musisz się zalogowąć";
-            break;
-        }
-
-
-        }
-    ?>
     </div>
             <form method="POST" action="index.php?action=createUser">
                 <ul>
@@ -92,7 +77,7 @@
                             ?></div> 
                         </li>
                         <li>
-                        <input type="hidden" name="recaptcha-response" id="recaptcha-response">
+                        <!-- reacaptcha <input type="hidden" name="recaptcha-response" id="recaptcha-response"> -->
                         <div class="errorMsg">
                             <?php
                             if(isset($params['error']['recaptcha']))
@@ -109,7 +94,7 @@
             Masz już konto? | <a href="index.php?action=searchUser">Zaloguj się!</a>
     </div>
 </div>
-
+ <!-- reacaptcha
 <script>
 
     var siteKey = '6LcQ9DwoAAAAABAyIdD8FRvKjlip5fRZMNQU01II';
@@ -121,3 +106,4 @@
         });
     });
 </script>
+-->

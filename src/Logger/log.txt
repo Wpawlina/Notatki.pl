@@ -1,0 +1,95 @@
+
+================================
+date: 2024-04-06 11:45:51 
+message: Connection Error 
+
+================================
+
+================================
+date: 2024-04-06 11:46:18 
+message: Connection Error 
+
+================================
+================================
+date: 2024-04-06 11:55:30 
+message: nie znaleziono uzytkownia o loginie wordpressuser 
+
+================================
+
+================================
+date: 2024-04-06 11:55:36 
+message: nie znaleziono uzytkownia o loginie wordpressuser 
+
+================================
+
+================================
+date: 2024-04-06 11:55:58 
+message: nie znaleziono uzytkownia o loginie wordpressuser3 
+
+================================
+
+================================
+date: 2024-04-06 11:56:30 
+message: nie znaleziono uzytkownia o loginie wordpressuser3 
+
+================================
+
+================================
+date: 2024-04-06 11:56:36 
+message: nie znaleziono uzytkownia o loginie wordpressusertesttsfadf 
+
+================================
+
+================================
+date: 2024-04-15 16:33:49 
+message: nie znaleziono uzytkownia o loginie wordpressuser3 
+
+================================
+
+================================
+date: 2024-04-15 16:33:51 
+message:  Błędne dane logowania test2@gmail.com 
+
+================================
+
+================================
+date: 2024-04-15 17:06:33 
+message:  Błędne dane logowania test2@gmail.com 
+
+================================
+
+================================
+date: 2024-04-17 17:46:17 
+message:  Błędne dane logowania test2@gmail.com 
+
+================================
+
+================================
+date: 2024-04-17 17:46:19 
+message: Call to undefined method APP\Model\NoteModel::count() 
+
+================================
+
+================================
+date: 2024-04-19 16:57:21 
+message:  Błędne dane logowania test2@gmail.com 
+
+================================
+
+================================
+date: 2024-04-19 17:41:17 
+message: nie znaleziono uzytkownia o loginie user_notes 
+
+================================
+
+================================
+date: 2024-04-19 17:41:23 
+message: nie znaleziono uzytkownia o loginie user_notes 
+
+================================
+
+================================
+date: 2024-04-19 17:41:32 
+message:  Błędne dane logowania test2@gmail.com 
+
+================================

@@ -15,8 +15,11 @@ use PDOStatement;
 use Throwable;
 
 
+
+#klasa UserModel jest odpowiedzalna za dostep do bazy danych i obsługe funkcjonalnosci zwiazanych z informacjami o uzytkowniku
 class UserModel extends AbstractModel
 {
+    #metoda search zwraca hasło,id,flage aktywacji użytkownika o podanym loginie
     public function search(string $login):array
     {
         try
@@ -40,6 +43,7 @@ class UserModel extends AbstractModel
          return [];
         
     }
+    #metoda create zapisuje w bazie danych nowego uzytkownika w opraciu o przesłane dane
     public function create(string $login,string $firstName, string $lastName , string $password,string $code):void
     {
         try
@@ -71,6 +75,7 @@ class UserModel extends AbstractModel
        
 
     }
+    #metoda show zweraca inforamacje o uzytkowniku o podanym id 
     public function show(int $userId):array
     {
         try
@@ -84,6 +89,7 @@ class UserModel extends AbstractModel
             throw new StorageException('Nie udało się znaleść użytkownika',400,$e);
         }
     }
+    #metoda edit wstawia zmodyfikowane dane o uzytkowniku do bazy danych
     public function edit(int $userId,string $firstName,string $lastName):void
     {
         try
@@ -94,9 +100,10 @@ class UserModel extends AbstractModel
             $this->conn->exec($query);
         }catch(PDOException $e)
         {
-            throw new StorageException('Nie udało się znaleść użytkownika',400,$e);
+            throw new StorageException("Nie udało się znaleść użytkownika $userId ",400,$e);
         }
     }
+    # metoda delete usuwa dane o uzytkowniku o podanym id z bazy danych
     public function delete(int $userId): void
     {
         try
@@ -105,11 +112,12 @@ class UserModel extends AbstractModel
             $this->conn->exec($query);
         }catch(PDOException $e)
         {
-            throw new StorageException('Nie udało się znaleść użytkownika',400,$e);
+            throw new StorageException("Nie udało się znaleść użytkownika $userId",400,$e);
         }
       
 
     }
+    #metoda list zwraca liczbe uzytkowników o podanym loginie 
     public function list(string $login):int
     {
         try
@@ -129,6 +137,7 @@ class UserModel extends AbstractModel
 
 
     }
+    #metoda getCodeInfo zwraca id,kod,date wygasniecia na podstawie przesłanego kodu aktywacji/zmiany hasła
     public function getCodeInfo(string $code): array
     {
         try
@@ -148,6 +157,7 @@ class UserModel extends AbstractModel
             throw new StorageException('Nie udało się znaleść użytkownika',400,$e);
         }
     }
+    #metoda activate ustawia flaga aktywacji konta uzytkownika o podanym id na true
     public function activate(int $userId):void
     {
         try
@@ -160,6 +170,7 @@ class UserModel extends AbstractModel
             throw new StorageException('Nie udało się aktywować użytkownika',400,$e);
         }
     }
+    # metoda wstawia kod zmiany hasła do bazy danych dla uzytkownika o podanym loginie
     public function insertChgPasswdCode(string $login,string $code):void
     {
         try
@@ -182,6 +193,7 @@ class UserModel extends AbstractModel
 
 
     }
+    #metoda updatePassword zmienia hasło zapisane w bazie danych dla uzytkownika o podanym id
     public function updatePassword(int $userId,string $password):void
     {
         try
@@ -197,6 +209,7 @@ class UserModel extends AbstractModel
         
         
     }
+    #metoda zwraca email uzytkownika o podanym id
     public function getEmailFromUserId(int $userId):string
     {
         try
@@ -213,6 +226,7 @@ class UserModel extends AbstractModel
 
 
     }
+    #metoda usuwa z bazy danych kod aktywacji/zmiany hasła 
     public function deleteUsedCode(string $code):void
     {
         try
@@ -229,7 +243,7 @@ class UserModel extends AbstractModel
         
         
     }
-
+    #metoda zwraca id uzytkownika o podanym loginie
     private function getUserIdfromEmail(string $login):int
     {
         try

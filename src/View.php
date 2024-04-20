@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App;
 
-
+#klasa View jest odpowiedzalna za wyswietlanie dopowiedniego tamplatu dla danego modułu aplikacji
 class View
 {
+    #metoda render wyswietla dany tamplate w zaleznosci od parametru page który otrzyma od kontrolera oraz od dodatkowych parametrów zawartych w tablicy params
     public function render(string $page, array $params=[]): void
     {
        
@@ -14,6 +15,9 @@ class View
        
         require_once('templates/layout.php');
     }
+    #metoda escape zabespiecza aplikacje przedtym wyswietleniem niebezpiecznych treści 
+    # zabespiecznie polega na eskajpowaniu w zależnosci od typu parametru
+    # jest to zabezpieczenie przed HTML injection attack
     private function escape(array $params):array
     {
         $clearParams=[];

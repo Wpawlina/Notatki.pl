@@ -341,6 +341,10 @@ form.note-form textarea {
 textarea {
   resize: none;
 }
+.user>h1{
+  color: #000;
+  font-size: 33px;
+}
 
 
 

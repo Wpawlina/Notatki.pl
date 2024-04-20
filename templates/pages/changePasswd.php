@@ -63,7 +63,7 @@
                             ?></div>
                         </li>
                         <li>
-                        <input type="hidden" name="recaptcha-response" id="recaptcha-response">
+                        <!-- <input type="hidden" name="recaptcha-response" id="recaptcha-response"> -->
                         <div class="errorMsg">
                             <?php
                             if(isset($params['error']['recaptcha']))
@@ -119,6 +119,7 @@
        ?>  
     
 </div>
+<!-- recaptcha
 <script>
 
     var siteKey = '6LcQ9DwoAAAAABAyIdD8FRvKjlip5fRZMNQU01II';
@@ -130,3 +131,4 @@
         });
     });
 </script>
+-->

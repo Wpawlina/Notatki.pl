@@ -3,7 +3,7 @@
     <div class="user">
     <div class="message">
     <?php
-    
+     #wyswietlanie wiadomosci i błedów uzytkownikowi
         if(!empty($params['error'])) 
         {
             switch($params['error'])

@@ -15,12 +15,17 @@ require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 
+
+
+# klasa mail handler jest odpowiedzalana za wysyłąnie emaili do tego korzysta z biblioteki PHPMailer 
 class MailHandler
 {
 
    
     private PHPMailer $mail;
 
+
+    # kontstruktor tworzy obiekt MailHandlera i przypisuje odpowiednia konfiguracje biblioteki PHPMailer z pliku config.php
     public function __construct(array $config) {
         try
         {
@@ -32,8 +37,8 @@ class MailHandler
         $this->mail->Port = $config['port'];
         $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $this->mail->SMTPAuth = true;
-        $this->mail->Username =$config['user']; // Podaj swój login gmail
-        $this->mail->Password = $config['password']; // Podaj swoje hasło do aplikacji
+        $this->mail->Username =$config['user']; 
+        $this->mail->Password = $config['password']; 
         $this->mail->CharSet = $config['charset'];
         $this->mail->setFrom($config['fromMail'], $config['fromName']);
         $this->mail->addReplyTo($config['replyToMail'], $config['replyToName']);
@@ -44,6 +49,10 @@ class MailHandler
             throw new EmailException('Błąd MailHandler');
         }
     }
+    
+
+
+    #metoda odpowiedzalana za wysłanie emaila powitalnego dla nowego konta uzytkownika wraz z linkiem do aktywacji tego konta
     public function create(string $email,string $createCode):void
     {
         try
@@ -75,9 +84,12 @@ class MailHandler
         }
         catch(Throwable $e)
         {
-            throw new EmailException('Błąd Wysyłania maila powitalnego');
+            throw new EmailException(" Błąd Wysyłania maila powitalnego do $email ");
         }
     }
+
+
+    #metoda odpowiedzalna za wysłanie emaila z kodem zmiany hasła
     public function chgPasswd(string $email,string $chgCode):void
     {
         
@@ -105,6 +117,8 @@ class MailHandler
         ;
         $this->mail->send();
     }
+
+    #metoda odpowiedzalna za wysłanie emaila z informacja o zmianie hasła
     public function notifyPassword(string $email):void
     {
         $this->mail->addAddress($email);
@@ -131,7 +145,7 @@ class MailHandler
 
     }
 
-
+    #metoda odpowiedzakalna za sprawdzenie poprawnosci konfiguracji
     private function validateConfig(array $config ) :void
     {
         if(

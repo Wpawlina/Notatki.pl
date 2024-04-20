@@ -1,11 +1,13 @@
 <?php
 declare(strict_types=1);
 
+#plik zwraca tablice z konfiguracja odpowiednich modłów aplikacji takich jak baza danych, zabezpieczenie haseł, wysyłanie emaili, recaptcha, tworzenie logów
+
 return [
     'db'=>[
     'password'=>'Qwerty12345',
-    'user'=>'user_notes',
-    'host'=>'localhost',
+    'user'=>'root',
+    'host'=>'mysql',
     'database'=>'notes2'
     ],
     'password'=>[ 
@@ -14,8 +16,8 @@ return [
     'mail'=>[
         'host'=>'smtp.gmail.com',
         'port'=>465,
-        'user'=>'server.wojciech@gmail.com',
-        'password'=>'zhrtvdastmhejivv',
+        'user'=>'######',
+        'password'=>'######',
         'charset'=>'UTF-8',
         'fromMail'=>'no-reply@notatki.pl',
         'fromName'=>'Notatki.pl',
@@ -24,6 +26,7 @@ return [
 
     ],
     'recaptcha'=>[
-        'secretKey'=>'6LcQ9DwoAAAAAKlVZUNymQdQV_G10PyuHBF1nbyQ'
-    ]
+        'secretKey'=>'#########'
+    ],
+    'file'=>['fileName'=>'src/Logger/log.txt'],
 ];

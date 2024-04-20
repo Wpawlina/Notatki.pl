@@ -17,19 +17,22 @@ use Throwable;
 
 
 
-
+#klasa NoteModel jest odpowiedzalna za dostep do bazy danych i obsługe funkcjonalnosci zwiazanych z notatkami użytkowników
 class NoteModel extends AbstractModel implements ModelNoteInterface
 {
   
     
     private int $user_id;
-
+    
+    #metoda set_user zapisuje id uzytkownika którego notatki bedą przetwarzane przez inne metody
     public function set_user(int $id)
     {
         $this->user_id=$id;
 
     }
-   
+    
+
+    #metoda create tworzy notatke o podanych parametrach i wstawia ja do bazy danych
     public function create(array $data):void
     {
         try
@@ -51,10 +54,12 @@ class NoteModel extends AbstractModel implements ModelNoteInterface
         }
         
     }
+    #metoda search znajduje notatki które spełniaja podane warunki i wypsiuje je w podanej kolejnosci
     public function search(array $phrase,int $pageNumber,int $pageSize , string $sortBy, string $sortOrder) : array
     {
         return $this->findBy($phrase,$pageNumber,$pageSize,$sortBy,$sortOrder);
     }
+    #metoda searchCount zwraca ile spełniajacych warunki notatek posiada zalogowany uzytkownik
     public function searchCount(array $phrase) : int
     {
         
@@ -81,12 +86,13 @@ class NoteModel extends AbstractModel implements ModelNoteInterface
         
     }
 
-
+    #Metoda list wypisuje wszytkie notatki w podanej kolejnosci
     public function list(int $pageNumber,int $pageSize , string $sortBy, string $sortOrder):array
     {
         return $this->findBy(null,$pageNumber,$pageSize,$sortBy,$sortOrder);
     }
 
+    #metoda count zwraca ile notatek posiada zalogowany uzytkownik
     public function count():int
     {
         try
@@ -110,6 +116,7 @@ class NoteModel extends AbstractModel implements ModelNoteInterface
         }
     }
 
+    #metoda get zwraca dane o notatce o podanym id 
     public function get(int $id):array
     {
         try{
@@ -122,7 +129,7 @@ class NoteModel extends AbstractModel implements ModelNoteInterface
         }
         catch(Throwable $e)
         {
-            throw new StorageException('Nie udało sie pobrać notatki',400,$e);
+            throw new StorageException("Nie udało sie pobrać notatki o id: $id " ,400,$e);
         }
        if(!$note)
         {
@@ -133,6 +140,7 @@ class NoteModel extends AbstractModel implements ModelNoteInterface
             
 
     }
+    #metoda edytuje istniejaca notatke o podanym id aktulizujac ja w bazie danych w oparciu o podane dane
     public function edit(int $id,array $data):void
     {
         try{
@@ -144,12 +152,13 @@ class NoteModel extends AbstractModel implements ModelNoteInterface
 
         }catch(Throwable $e)
         {
-            throw new StorageException('Nie udało się zaktualizować notatki',400,$e);
+            throw new StorageException("Nie udało się zaktualizować notatki o id: $id ",400,$e);
 
         }
 
 
     }
+    #metoda delete usuwa notatke o podanym id
     public function delete(int $id):void
     {
         try{
@@ -160,10 +169,11 @@ class NoteModel extends AbstractModel implements ModelNoteInterface
         }
         catch(Throwable $e)
         {
-            throw new StorageException('Nie udało się usunąć notatki',400,$e);
+            throw new StorageException("Nie udało się usunąć notatki o id: $id",400,$e);
         }
 
     }
+    # metoda findBy znajduje notatki o podanych parametrach i zwraca je  w określonym formacie i kolejności
     private function findBy(?array $phrase,int $pageNumber,int $pageSize , string $sortBy, string $sortOrder):array
     {
         try
@@ -205,6 +215,7 @@ class NoteModel extends AbstractModel implements ModelNoteInterface
         
 
     }
+    #metoda getWhere tworzy klauzle WHERE jezyka SQL w oparicu o podane parametry
     private function getWhere($phrase):string
     {
       

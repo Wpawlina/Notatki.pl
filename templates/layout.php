@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
   <link  rel="stylesheet" href="public/style.css">
-  <script src="https://www.google.com/recaptcha/api.js?render=6LcQ9DwoAAAAABAyIdD8FRvKjlip5fRZMNQU01II"></script>
+ <!-- <script src="https://www.google.com/recaptcha/api.js?render=6LcQ9DwoAAAAABAyIdD8FRvKjlip5fRZMNQU01II"></script>-->
 </head>
 
 <body class="body">
@@ -29,7 +29,7 @@
     </div>
 
     <div class="footer">
-      <p>Notatki - projekt w kursie PHP</p>
+      <p>Notatki - projekt Wojciech Pawlina</p>
     </div>
   </div>
   
