@@ -18,11 +18,11 @@ Uruchominie poprzez  docker
 Moduł recaptcha został wyłączony na potrzeby prezentacji aplikacji, istneje mozliwosc jego ponownego uruchomienia po zarjestrowaniu domeny w serwisie googyl recaptcha i wpisaniu odpowiednik kluczy w `config.php` oraz odkomentowaniu odpowiednich czesci kodu oznaczonych recaptcha
 W dokerze również nie działa samo wysyłanie emaili
 Urchomienie 
--przejdz do folderu z aplikacja i wykonaj komende docker-compose up -d
--wpisanie w polu exec kontenera php_8.2_apache_container skrytu chmod -R 777 ../html
--wpisania w przegladarke adresu localhost
--do testowania aplikacji można użyc konta wojtek.pawlina3@gmail.com z hasłem moje#Notatki25
--aby zalogowac sie do phpMyAdmin użyj konta root z hasłem Qwerty12345
+- przejdz do folderu z aplikacja i wykonaj komende docker-compose up -d
+- wpisanie w polu exec kontenera php_8.2_apache_container skrytu chmod -R 777 ../html
+- wpisania w przegladarke adresu localhost
+- do testowania aplikacji można użyc konta wojtek.pawlina3@gmail.com z hasłem moje#Notatki25
+- aby zalogowac sie do phpMyAdmin użyj konta root z hasłem Qwerty12345
 
 
 
