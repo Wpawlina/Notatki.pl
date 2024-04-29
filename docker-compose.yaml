@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   php_apache:
     container_name: php_8.2_apache_container
@@ -6,11 +6,13 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 80:80
+      - 8081:80
     networks:
       - projekt_share_network
     depends_on:
       - mysql
+    volumes:
+      - .:/var/www/html
 
   mysql:
     image: mysql:8.1.0

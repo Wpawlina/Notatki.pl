@@ -20,9 +20,9 @@ W dokerze również nie działa samo wysyłanie emaili
 Urchomienie 
 - przejdz do folderu z aplikacja i wykonaj komende docker-compose up -d
 - wpisanie w polu exec kontenera php_8.2_apache_container skrytu chmod -R 777 ../html
-- wpisania w przegladarke adresu localhost
+- wpisania w przegladarke adresu localhost:8081
 - do testowania aplikacji można użyc konta wojtek.pawlina3@gmail.com z hasłem moje#Notatki25
-- aby zalogowac sie do phpMyAdmin użyj konta root z hasłem Qwerty12345
+- aby zalogowac sie do phpMyAdmin wejdz na localhost:8080 i  użyj konta root z hasłem Qwerty12345
 
 
 
