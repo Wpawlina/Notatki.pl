@@ -15,7 +15,7 @@ do testowania aplikacji można użyc konta wojtek.pawlina3@gmail.com z hasłem m
 
 
 Uruchominie poprzez  docker
-Moduł recaptcha został wyłączony na potrzeby prezentacji aplikacji, istneje mozliwosc jego ponownego uruchomienia po zarjestrowaniu domeny w serwisie googyl recaptcha i wpisaniu odpowiednik kluczy w `config.php` oraz odkomentowaniu odpowiednich czesci kodu oznaczonych recaptcha
+Moduł recaptcha został wyłączony na potrzeby prezentacji aplikacji, istneje mozliwosc jego ponownego uruchomienia po zarjestrowaniu domeny w serwisie google recaptcha i wpisaniu odpowiednik kluczy w `config.php` oraz odkomentowaniu odpowiednich czesci kodu oznaczonych recaptcha
 W dokerze również nie działa samo wysyłanie emaili
 Urchomienie 
 - przejdz do folderu z aplikacja i wykonaj komende docker-compose up -d
