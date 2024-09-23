@@ -21,6 +21,8 @@ git clone git@github.com:Wpawlina/Notatki.pl.git
 <h4>Start Docker</h4>
 cd Notatki.pl
 docker compose up -d
+<br/>
+<br/>
 
 <p>
 Proceed to http://127.0.0.1:8081/ and create an account and verify your email.
