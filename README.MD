@@ -1,5 +1,5 @@
 Projekt Notatki.pl to aplikacja oferujacy uzytkownikom serwis internetowy do tworzenia notatek które sa przechowywane na serwerzę i dostepne w internecie. Serwis po stworzeniu przez uzytkownika konta umozliwia mu tworzenie,  edytowanie i usuwanie  notatek należacych do jego konta. Wyszystkie notatki są przechowywane na serwerze i uzytkownik ma zawsze dostep do wszytkich swoich notatek.
-Aplikacja napisana jest w PHP bez użycia frameworków, jest zbudowana w modelu MVC i architekturze monolit. Serwis 
+Aplikacja napisana jest w PHP bez użycia frameworków, jest zbudowana w modelu MVC i architekturze monolit. 
 
 
 

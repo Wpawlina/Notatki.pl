@@ -110,6 +110,10 @@ class UserModel extends AbstractModel
     {
         try
         {
+            $query = "DELETE FROM `user_codes` WHERE `user_id`=$userId;";
+            $this->conn->exec($query);
+            $query = "DELETE FROM `notes` WHERE `user_id`=$userId;";
+            $this->conn->exec($query);
             $query = "DELETE FROM `users` WHERE `user_id`=$userId LIMIT 1";
             $this->conn->exec($query);
         }
