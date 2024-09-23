@@ -9,8 +9,8 @@ The application is written in PHP without using frameworks, built in the MVC mod
 
 <h2>Technologies</h2>
 <ul>
-  <li>Backend: PHP,MySql,Gmail SMTP</li>
-  <li>Frontend: HTML,CSS,JavaScript</li>
+  <li>Backend: PHP, MySql, Gmail SMTP</li>
+  <li>Frontend: HTML, CSS, JavaScript</li>
   <li>Development Enviroment: PHPStorm, Visual Studio Code</li>
 </ul>
 
