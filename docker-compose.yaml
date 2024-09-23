@@ -23,7 +23,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - C:\projekt_share\mysql:/var/lib/mysql  
+      - ./mysql/notes2:/var/lib/mysql  
     networks:
       - projekt_share_network 
 
