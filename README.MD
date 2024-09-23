@@ -15,15 +15,17 @@ The application is written in PHP without using frameworks, built in the MVC mod
 </ul>
 
 <h2>Setup</h2>
-## Clone repository
-```bash
+<h4>Clone repository</h4>
 git clone git@github.com:Wpawlina/Notatki.pl.git
-````
-## Start Docker
-```bash
+
+<h4>Start Docker</h4>
 cd Notatki.pl
 docker compose up -d
-````
+
+Proceed to http://127.0.0.1:8081/ and create an account and verify your email.
+For PhpMyAdmin proceed to http://127.0.0.1:8080/ and login as root with password Qwerty12345
+
+
 
 
 
