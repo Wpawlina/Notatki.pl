@@ -7,7 +7,8 @@ use APP\Exception\AppException;
 
 
 
-# klasa rozszerzajaca Exception dla wyjatków zwiazanych z nie aktywowanym kontem użytkownika
+# [PL] klasa rozszerzajaca Exception dla wyjatków zwiazanych z nie aktywowanym kontem
+# [ENG] class extending Exception for exceptions related to the not activated account
 class NotActivatedException extends AppException
 {
     

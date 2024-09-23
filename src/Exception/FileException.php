@@ -5,7 +5,8 @@ namespace APP\Exception;
 
 use APP\Exception\AppException;
 
-# klasa rozszerzajaca Exception dla wyjatków zwiazanych z działaniem Loggera 
+# [PL] klasa rozszerzajaca Exception dla wyjatków zwiazanych z działaniem Lpggera
+# [ENG] class extending Exception for exceptions related to the Logger
 class FileException extends AppException
 {
     
