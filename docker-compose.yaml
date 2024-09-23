@@ -23,7 +23,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./mysql/notes2:/var/lib/mysql  
+      - ./data:/docker-entrypoint-initdb.d
     networks:
       - projekt_share_network 
 
