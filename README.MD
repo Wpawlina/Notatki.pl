@@ -6,6 +6,7 @@ Project Notatki.pl is an application that offers users an online service for cre
 
 The application is written in PHP without using frameworks, built in the MVC model, and follows a monolithic architecture.
 
+
 <h2>Technologies</h2>
 <ul>
   <li>Backend: PHP,MySql,Gmail SMTP</li>
@@ -13,15 +14,24 @@ The application is written in PHP without using frameworks, built in the MVC mod
   <li>Development Enviroment: PHPStorm, Visual Studio Code</li>
 </ul>
 
+<h2>Setup</h2>
+## Clone repository
+```bash
+git clone git@github.com:Wpawlina/Notatki.pl.git
+```
+## Start Docker
+```bash
+cd Notatki.pl
+docker compose up -d
+```
 
 
 
 
-Urchomienie 
-- przejdz do folderu z aplikacja i wykonaj komende docker compose up -d
-- wpisania w przegladarke adresu localhost:8081
-- do testowania aplikacji można użyc konta wojtek.pawlina3@gmail.com z hasłem moje#Notatki25
-- aby zalogowac sie do phpMyAdmin wejdz na localhost:8080 i  użyj konta root z hasłem Qwerty12345
+
+
+
+
 
 
 
