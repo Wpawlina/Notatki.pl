@@ -25,7 +25,7 @@ docker compose up -d
 <br/>
 
 <p>
-Proceed to http://127.0.0.1:8081/ and create an account and verify your email.
+Proceed to http://127.0.0.1:8081/ and create an account.
 
 For PhpMyAdmin proceed to http://127.0.0.1:8080/ and login as root with password Qwerty12345
 </p>

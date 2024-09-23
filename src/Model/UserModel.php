@@ -56,7 +56,7 @@ class UserModel extends AbstractModel
             $time = $time->format('Y-m-d H:i:s');
             $time = $this->conn->quote($time, PDO::PARAM_STR);
             $code = $this->conn->quote($code, PDO::PARAM_STR);
-            $query = "INSERT INTO `users`(`email`,`first_name`,`last_name`,`password`) VALUES($login, $firstName, $lastName, $password);";
+            $query = "INSERT INTO `users`(`email`,`first_name`,`last_name`,`password`,`activated`) VALUES($login, $firstName, $lastName, $password,1);";
             $this->conn->exec($query);
             $query = "SELECT `user_id` FROM `users` WHERE `email`=$login";
             $result = $this->conn->query($query);
