@@ -7,7 +7,8 @@ use APP\Exception\AppException;
 
 //require_once('src/Exception/AppException.php');
 
-# klasa rozszerzajaca Exception dla wyjatków zwiazanych z działaniem mailHandlera
+# [PL] klasa rozszerzajaca Exception dla wyjatków zwiazanych z działaniem MailHandlera
+# [ENG] class extending Exception for exceptions related to the  MailHandler
 class EmailException extends AppException
 {
     

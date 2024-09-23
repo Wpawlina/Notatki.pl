@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-
 //require_once("src/view.php");
 //require_once('src/database.php');
 //require_once('src/Exception/ConfigurationException.php');
@@ -25,13 +24,16 @@ use APP\Exception\AppException;
 use APP\Exception\EmailException;
 use APP\Exception\FileException;
 
-# klasa AbstractController zawiera podstawowe funkcjonalnosci kontrolera w modelu MVC takie jak przypisanie konfiguracji, uruchomienie pozostałych elementów aplikacji oraz przekierowania 
-# Jest ona Rozszerzana przez klasę MainController która jest opdowiedzalne za implementacje poszczególnych zadań które nalezą do kontrolera w modelu MVC  
+# [PL] Klasa AbstractController zawiera podstawowe funkcjonalności kontrolera w modelu MVC takie jak przypisanie konfiguracji, uruchomienie pozostałych elementów aplikacji oraz przekierowania.
+# Jest ona rozszerzana przez klasę MainController, która odpowiada za implementację poszczególnych zadań kontrolera w modelu MVC. 
+
+#  [ENG] The AbstractController class contains basic functionalities of a controller in the MVC model such as configuration assignment, starting other application elements, and redirections.
+# It is extended by the MainController class, which is responsible for implementing specific tasks of the controller in the MVC model.
 abstract class AbstractController
 {
-    protected string $defaultAction='searchUser'; 
+    protected string $defaultAction = 'searchUser'; 
 
-    protected static array $config=[];
+    protected static array $config = [];
 
     protected Logger $logger;
     protected Request $request;
@@ -40,144 +42,112 @@ abstract class AbstractController
     protected UserModel $userModel;
     protected MailHandler $mailHandler;
 
-    #funckcja słuzy przypisaniu do klasy konfiguracji kontrolera z pliku config.php 
+    # [PL] Funkcja służy przypisaniu do klasy konfiguracji kontrolera z pliku config.php. 
+    # [ENG] The function assigns the controller's configuration from the config.php file to the class. 
     public static function initConfiguration(array $config): void
     {
-        self::$config=$config; 
-       
+        self::$config = $config; 
     }
 
-    # konstruktor klasy inicializuje lub/i przypisuje obiekty klas wykorzystwanych w aplikacji takie jak view odpowidzialne za wyswietlanie HTML, Modele odpowiedzalne za dostep do bazy danych,
-    # Request odpowiedzalny za dostep do protokołu HTTP, MailHandler odpowiedzalny za wysyłanie email, Logger odpowiedzialny za zapsiywanie loggów o błedach do pliku
-    public function __construct(Request $request,Logger $logger)
+    # [PL] Konstruktor klasy inicjalizuje lub przypisuje obiekty klas używanych w aplikacji, takich jak view (odpowiedzialne za wyświetlanie HTML), 
+    # modele (odpowiedzialne za dostęp do bazy danych), request (odpowiedzialny za dostęp do HTTP), mail handler (wysyłanie e-maili) oraz logger (zapisywanie logów błędów). 
+
+    # [ENG] The class constructor initializes or assigns the class objects used in the application, such as view (responsible for rendering HTML), 
+    # models (for database access), request (HTTP access), mail handler (email sending), and logger (error logging). 
+    public function __construct(Request $request, Logger $logger)
     {
-        if(empty(self::$config['db']))
-        {
+        if (empty(self::$config['db'])) {
             throw new ConfigurationException('Configuration error');
         }
 
-        $this->noteModel=new NoteModel(self::$config['db']);
-        $this->userModel=new UserModel(self::$config['db']);
-        $this->mailHandler=new MailHandler(self::$config['mail']);
-        $this->request=$request;
+        $this->noteModel = new NoteModel(self::$config['db']);
+        $this->userModel = new UserModel(self::$config['db']);
+        $this->mailHandler = new MailHandler(self::$config['mail']);
+        $this->request = $request;
         $this->view = new View();
-        $this->logger=$logger;
-
+        $this->logger = $logger;
     }
-    #funkcja run jest funkcja pośrednicząca która ma na celu uruchomienie odpowiednej funkcji kontrolera na podstawie informacji z protokołu HTTP 
-    # Zaweiera ona również elementy bezpieczenstwa jak blokowanie dostepu do niektórych funkcji dla nie zalgowanych uzytkowników oraz zabezpieczenie przed Session Hijacking przez pliki cookies
+
+    # [PL] Funkcja run uruchamia odpowiednią akcję kontrolera na podstawie informacji z protokołu HTTP. Zawiera zabezpieczenia takie jak ograniczenie dostępu dla niezalogowanych użytkowników i sesji hijacking. 
+
+    # [ENG] The run function triggers the appropriate controller action based on the HTTP protocol information. It includes security measures such as limiting access for non-logged-in users and session hijacking prevention. 
     public function run(): void
     {    
-               
-   
-
-        try{
-            
-            #zabazpieczenie przed Session Hijacking poprzez weryfikacje HTTP_USER_AGENT
-            if(!empty($this->request->sessionParam('HTTP_USER_AGENT',null)))
-            {
-                
-                if($this->request->serverParam('HTTP_USER_AGENT',null)!==$this->request->sessionParam('HTTP_USER_AGENT',null))
-                {
-                   
-                   
-                   session_destroy();
-                   $this->redirect('index.php',[]);
-                 
-                  
+        try {
+            # [PL] Zabezpieczenie przed Session Hijacking poprzez weryfikację HTTP_USER_AGENT.
+            #  [ENG]  Protection against Session Hijacking by verifying HTTP_USER_AGENT.
+            if (!empty($this->request->sessionParam('HTTP_USER_AGENT', null))) {
+                if ($this->request->serverParam('HTTP_USER_AGENT', null) !== $this->request->sessionParam('HTTP_USER_AGENT', null)) {
+                    session_destroy();
+                    $this->redirect('index.php', []);
                 }
-            }
-            else
-            {
+            } else {
                 $this->request->setUserAgentSession(($this->request->serverParam('HTTP_USER_AGENT')));
             }
 
-
-
-
-            #W zaleznosci od tego czy jest zalgowany uzytkownik ustawienie domyslej akcji kontrolera
-            if($this->request->sessionParam('user_id',null))
-            {
-                $this->defaultAction='listNotes';
-                $this->noteModel->set_user($this->request->sessionParam('user_id',null));
+            # [PL] W zależności od zalogowania użytkownika ustawienie domyślnej akcji kontrolera. 
+            # [ENG] Set the default controller action depending on whether the user is logged in. 
+            if ($this->request->sessionParam('user_id', null)) {
+                $this->defaultAction = 'listNotes';
+                $this->noteModel->set_user($this->request->sessionParam('user_id', null));
             }
 
-
-            #wywołanie odpowiednej akcji w zaleznosci od parametrów otrzymanych przez protokół HTTP
-            $action=$this->action().'Action';
-            if(!method_exists($this,$action))
-            {
-                $action=$this->defaultAction.'Action';   
+            # [PL] Wywołanie odpowiedniej akcji na podstawie parametrów z protokołu HTTP. 
+            # [ENG] Calling the appropriate action based on HTTP protocol parameters. 
+            $action = $this->action() . 'Action';
+            if (!method_exists($this, $action)) {
+                $action = $this->defaultAction . 'Action';   
             }
-            #ogranczenie dostepu do funkcji które sa dedykowane tylko dla zalogowanych uzytkowników
-            if(!$this->request->sessionParam('user_id',null))
-            {
-                if($action!=='searchUserAction' && $action!=='createUserAction' && $action!=='termsAction' && $action!=='activateUserAction' && $action!=="chgPasswdAction")
-                {
-                    $this->redirect('index.php',['error'=>'missingUser']);
+
+            #  [PL] Ograniczenie dostępu do funkcji przeznaczonych wyłącznie dla zalogowanych użytkowników.
+            #   [ENG] Restrict access to functions dedicated only to logged-in users.
+            if (!$this->request->sessionParam('user_id', null)) {
+                if (!in_array($action, ['searchUserAction', 'createUserAction', 'termsAction', 'activateUserAction', 'chgPasswdAction'])) {
+                    $this->redirect('index.php', ['error' => 'missingUser']);
                 }
             }
             $this->$action();
-            
-            
-        # przechwytywanie wyjątków powstałych w czasie działania funkcji run
-        }catch(StorageException $e)
-        {
+
+        # [PL] Obsługa wyjątków podczas działania funkcji run. 
+        # [ENG]  Handling exceptions during the run function execution.
+        } catch (StorageException $e) {
             $this->logger->writeLogEntry($e->getMessage());
-            
-            $this->view->render('error',['message'=>$e->getMessage()]);
-            
-        
-        }
-        catch(NotFoundException $e)
-        {
+            $this->view->render('error', ['message' => $e->getMessage()]);
+        } catch (NotFoundException $e) {
             $this->logger->writeLogEntry($e->getMessage());
-    
-            $this->redirect('index.php',['error'=>'NotFound']);
-           
-        }
-        catch(WrongCredentialsException $e)
-        {
+            $this->redirect('index.php', ['error' => 'NotFound']);
+        } catch (WrongCredentialsException $e) {
             $this->logger->writeLogEntry($e->getMessage());
-           
-            $this->redirect('index.php',['error'=>'WrongCredentials']);
-            
-        }
-        catch(NotActivatedException $e)
-        {
+            $this->redirect('index.php', ['error' => 'WrongCredentials']);
+        } catch (NotActivatedException $e) {
             $this->logger->writeLogEntry($e->getMessage());
-            $this->redirect('index.php',['error'=>'NotActivated']);
+            $this->redirect('index.php', ['error' => 'NotActivated']);
         }
-       
     }
 
-    # funkckja jest odpowiedzalana za przekierowania na odpowienie adresy przy uzyciu wbudowanej funkcji header
-    final protected function redirect(string $to, array $params):void
+    # [PL] Funkcja jest odpowiedzialna za przekierowania przy użyciu funkcji header. 
+    # [ENG] The function is responsible for redirections using the header function. 
+    final protected function redirect(string $to, array $params): void
     {
-        $location=$to;
-        $queryParams=[];
-        if(count($params))
-        {
-            foreach($params as $key => $value)
-            {
-                $queryParams[]=urlencode($key).'='.urlencode($value);
-    
+        $location = $to;
+        $queryParams = [];
+        if (count($params)) {
+            foreach ($params as $key => $value) {
+                $queryParams[] = urlencode($key) . '=' . urlencode($value);
             }
-            $queryParams=implode('&',$queryParams);
-            $location.='?'.$queryParams;
+            $queryParams = implode('&', $queryParams);
+            $location .= '?' . $queryParams;
         }
-    
+
         header("Location: $location");
         exit();
     }
     
-
-    #funckcja action zwraca odpowiednia nazwe metody w zaleznosci od parametrów przesłanych przez protokół HTTP
+    # [PL] Funkcja action zwraca odpowiednią nazwę metody w zależności od parametrów przesłanych przez protokół HTTP. 
+    #  [ENG] The action function returns the appropriate method name based on parameters sent via the HTTP protocol. 
     private function action(): string
     {
-        $action=$this->request->getParam('action',$this->defaultAction);
-       
-        return $action?? $this->defaultAction;
+        $action = $this->request->getParam('action', $this->defaultAction);
+        return $action ?? $this->defaultAction;
     }
-
 }

@@ -6,7 +6,8 @@ namespace APP\Exception;
 use Exception;
 
 
-# klasa rozszerzajaca Exception dla wyjatków zwiazanych z niepoprawnymi danymi logowania
+# [PL] klasa rozszerzajaca Exception dla wyjatków zwiazanych z nieprawidłowymi danymi logowania
+# [ENG] class extending Exception for exceptions related to incorrect login data
 class WrongCredentialsException extends Exception
 {
 

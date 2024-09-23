@@ -14,14 +14,17 @@ use PDO;
 
 //require_once('src/Controller/AbstractController.php');
 
-# klasa MainController dziedziczy funkcjonalnosci zawarte w AbstractController i rozszerze ja o metody wywoływane dla opowiednich parametrów action przesyłanych przez protokół HTTP
+# [PL] klasa MainController dziedziczy funkcjonalnosci zawarte w AbstractController i rozszerze ja o metody wywoływane dla opowiednich parametrów action przesyłanych przez protokół HTTP
+# [ENG] The MainController class inherits functionalities from AbstractController and extends it with methods called for corresponding action parameters sent via HTTP protocol
 class MainController extends AbstractController
 {
     
     private const PAGE_SIZE=10;
   
-    # metoda wywołujaca odpowiedni moduł do stworzenia nowej notatki przez uzytkownika
-    #pobiera poprzez metode POST informacje z formularza i zapisuje je w bazie danych 
+    # [PL] metoda wywołujaca odpowiedni moduł do stworzenia nowej notatki przez uzytkownika
+    # [PL] pobiera poprzez metode POST informacje z formularza i zapisuje je w bazie danych 
+    # [ENG] Method that invokes the appropriate module to create a new note by the user
+    # [ENG] It receives information from the form via POST method and saves it in the database
     protected function createNoteAction():void
     {           
         if($this->request->hasPost())
@@ -33,16 +36,19 @@ class MainController extends AbstractController
         $this->view->render('createNote');
 
     }
-    # metoda wywołujaca odpowiedni moduł do wyswietlenia szczegółów odpowiedniej notatki 
+    # [Pl] metoda wywołujaca odpowiedni moduł do wyswietlenia szczegółów odpowiedniej notatki 
+    # [ENG] Method that invokes the appropriate module to display details of a specific note
     protected function showNoteAction():void
     {
         
         $this->view->render('showNote',['note'=>$this->getNote()]);
     }
-    # metoda wywołujaca odpowiedni moduł do wylistowania notatek przez uzytkownika
-    # w zaleznosci od parametrów przesłanych w formularzu wyszukuje w bazie danych notatki spełnajace podane przez uzytkownika warunki i wyswietla je w preferowany przez uzytkownika sposób
-    protected function listNotesAction():void
 
+    # [PL] metoda wywołujaca odpowiedni moduł do wylistowania notatek przez uzytkownika
+    # w zaleznosci od parametrów przesłanych w formularzu wyszukuje w bazie danych notatki spełnajace podane przez uzytkownika warunki i wyswietla je w preferowany przez uzytkownika sposób
+    # [ENG] Method that invokes the appropriate module to list notes for the user
+    #  Depending on the parameters sent in the form, it searches the database for notes meeting the conditions specified by the user and displays them in the user's preferred way
+    protected function listNotesAction():void
     {
         $title=$this->request->getParam('title');
         $date=$this->request->getParam('date');
@@ -101,8 +107,10 @@ class MainController extends AbstractController
         $this->view->render('listNote',$viewParams ?? []);        
     }
 
-    #metoda wywołujaca odpowiedni moduł do edycji notatki przez uzytkownika
+    # [PL] metoda wywołujaca odpowiedni moduł do edycji notatki przez uzytkownika
     #pobiera inforamcje od uzytkownika poprzez formularz i metode POST a nastepnie modyfikuje dane w bazie danych
+    # [ENG] Method that invokes the appropriate module for editing a note by the user
+    #  It receives information from the user via a form and POST method, then modifies the data in the database
     protected function editNoteAction():void
     {
         
@@ -116,8 +124,11 @@ class MainController extends AbstractController
        $this->view->render('editNote',['note'=>$this->getNote()]);
     }
     
-    #metoda wywołujaca odpowiedni moduł do usuniecia notatki przez uzytkownika
+    # [PL] metoda wywołujaca odpowiedni moduł do usuniecia notatki przez uzytkownika
     #poprzez formularz sprawdza czy uzytkownik napewno chce usunac te notatke jesli tak to usuwa informacje o danej notatce z bazy danych
+    # [ENG] Method that invokes the appropriate module for deleting a note by the user
+    # It checks via a form if the user really wants to delete this note, if so, it removes the information about the given note from the database
+
     protected function deleteNoteAction():void
     {
         if($this->request->isPost())
@@ -130,9 +141,13 @@ class MainController extends AbstractController
        
     }
 
-    #metoda wywołujaca odpowiedni moduł do logowania uzytkownika
+    # [PL] metoda wywołujaca odpowiedni moduł do logowania uzytkownika
     #pobiera inforamcje od uzytkownika poprzez formularz i metode POST a nastepnie weryfkuje ich poprawnosc w stosunku do danych znajdujacych sie w bazie danych
-    #jesli dane sa poprawne zapisuje dane o uzytkowniku w sesji 
+    #jesli dane sa poprawne zapisuje dane o uzytkowniku w sesji
+    # [ENG] Method that invokes the appropriate module for user login
+    #  It receives information from the user via a form and POST method, then verifies their correctness against the data in the database
+    # If the data is correct, it saves the user's data in the session
+
     protected function searchUserAction():void
     {
         
@@ -188,10 +203,15 @@ class MainController extends AbstractController
 
 
 
-    #metoda wywołujaca odpowiedni moduł do utwozenia odpowiedniego uzytkownika
+    # [PL] metoda wywołujaca odpowiedni moduł do utwozenia odpowiedniego uzytkownika
     #pobiera inforamcje od uzytkownika poprzez formularz i metode POST a nastepnie werfikuje poprawnosc dancyh przesłanych przez uzytkownika 
     # jesli dane sa poprawne dodaje nowy rekord w bazie danych i wysyła kod aktywacyjny na podany email
     # hasła sa zabezpieczane poprzez wbudowana metode password_hash i algorytm BCRYPT oraz dodatkowy kod dodawany do hasła tzw Pepper 
+    # [ENG] Method that invokes the appropriate module to create a new user
+    #  It receives information from the user via a form and POST method, then verifies the correctness of the data sent by the user
+    #  If the data is correct, it adds a new record to the database and sends an activation code to the provided email
+    #  Passwords are secured using the built-in password_hash method and BCRYPT algorithm, plus an additional code added to the password called Pepper
+
     protected function createUserAction():void
     {
         $viewParams=[
@@ -207,10 +227,10 @@ class MainController extends AbstractController
           $password=$this->request->postParam('password','');
           $password2=$this->request->postParam('password2','');
           $terms=$this->request->postParam('terms','');
-          /* recaptcha
+        
           $recaptchaSecretKey = self::$config['recaptcha']['secretKey']; 
           $recaptchaResponse =$this->request->postParam('recaptcha-response','');
-          */
+          
           //validation
 
           //email(login)
@@ -261,7 +281,7 @@ class MainController extends AbstractController
             $validation=false;
           }
           
-          /*recaptcha
+        
           $url = 'https://www.google.com/recaptcha/api/siteverify';
           $data = [
             'secret' => $recaptchaSecretKey,
@@ -282,7 +302,7 @@ class MainController extends AbstractController
                 $validation=false;
                 $viewParams['error']['recaptcha']=1;
            }
-           */
+           
            if($validation===true)
            {
             $pepper=self::$config['password']['pepper'];
@@ -305,7 +325,8 @@ class MainController extends AbstractController
     }
 
 
-    #metoda wywołujaca odpowiedni moduł do wyswietlenia informacji o zalogowanym uzytkowniku
+    # [PL] metoda wywołujaca odpowiedni moduł do wyswietlenia informacji o zalogowanym uzytkowniku
+     # [ENG] Method that invokes the appropriate module to display information about the logged-in user
     protected function showUserAction():void
     {
         $result=$this->userModel->show($this->request->sessionParam('user_id',null));
@@ -314,7 +335,9 @@ class MainController extends AbstractController
 
     }
 
-    #metoda wywołujaca odpowiedni moduł do wylogowania uzytkownika poprzez usuniecie informacji o nim z sesji
+    # [PL] metoda wywołujaca odpowiedni moduł do wylogowania uzytkownika poprzez usuniecie informacji o nim z sesji
+    # [ENG] Method that invokes the appropriate module to display information about the logged-in user
+
     protected function logoutAction():void
     {
         $this->request->unsetUserSession();
@@ -322,8 +345,11 @@ class MainController extends AbstractController
 
     }
 
-    #metoda wywołujaca odpowiedni moduł do edycji infomacji o  uzytkowniku 
+    # [PL] metoda wywołujaca odpowiedni moduł do edycji infomacji o  uzytkowniku 
     # pobiera inforamcje o uzytkowniku poprzez formularz a nastepnie aktualizuje informacje w bazie danych
+    # [ENG] Method that invokes the appropriate module to edit user information
+    # It receives user information via a form and then updates the information in the database
+
     protected function editUserAction():void
     {
         if($this->request->isPost())
@@ -341,7 +367,9 @@ class MainController extends AbstractController
 
 
 
-   #metoda wywołujaca odpowiedni moduł do zamkniecia konta uzytkownika poprzez usuniecie informacji o nim z bazy danych 
+   # [PL] metoda wywołujaca odpowiedni moduł do zamkniecia konta uzytkownika poprzez usuniecie informacji o nim z bazy danych 
+   # [ENG] Method that invokes the appropriate module to close a user's account by removing their information from the database
+
    protected function deleteUserAction():void
    {
     if($this->request->isPost())
@@ -355,8 +383,12 @@ class MainController extends AbstractController
 
 
 
-   #metoda wywołujaca odpowiedni moduł do aktywacji konta uzytkownika poprzez kod aktywacyny wysłany przy utworzeniu konta na emial uzytkownika
+   # [PL] metoda wywołujaca odpowiedni moduł do aktywacji konta uzytkownika poprzez kod aktywacyny wysłany przy utworzeniu konta na emial uzytkownika
    # jesli kod jest poprawny i nie upłynoł czas na aktywacje konta, konto zostaje aktywowane i uzytkownik może sie juz zalogować
+    # [ENG]  Method that invokes the appropriate module to activate a user's account via the activation code sent to the user's email upon account creation
+    # If the code is correct and the activation time has not expired, the account is activated and the user can now log in
+
+
    protected function activateUserAction() : void
    {
     
@@ -387,9 +419,14 @@ class MainController extends AbstractController
 
 
    #metoda wywołujaca odpowiedni moduł do zmiany hasła przez uzytkownika
-   # jesli  akcja jest wywołana z poziomu zalogowanego uzytkownika poprzez formularz uzytkownik podaje nowe hasło i jest ono aktualizowane w bazie danych
+   # [PL] jesli  akcja jest wywołana z poziomu zalogowanego uzytkownika poprzez formularz uzytkownik podaje nowe hasło i jest ono aktualizowane w bazie danych
    # jesli akcja jest wywołana z poziomu niezalogowanego uzytkownika poprzez opcje zresetuj hasło na emaila uzytkownika wysyłany jest link z kodem do resetu hasła 
    # akcja jest wywołana z poziomu linku z kodem do zmiany o ile kod jest poprawny uzytkownik podaje nowe hasło poprzez formularz i jest ono aktualizowane w bazie danych
+   # [ENG] Method that invokes the appropriate module for changing the user's password
+    # If the action is called from a logged-in user via a form, the user provides a new password and it is updated in the database
+    # If the action is called from a non-logged-in user via the reset password option, a link with a password reset code is sent to the user's email
+    # If the action is called from a link with a code, and if the code is correct, the user provides a new password via a form and it is updated in the database
+
    protected function chgPasswdAction():void
    {
         $userId=$this->request->sessionParam('user_id',null);
@@ -486,16 +523,16 @@ class MainController extends AbstractController
                     $login=$this->request->postParam('login','');
                     $checkEmail=$this->userModel->list($login);
                     $validation=true;
-                    /*recaptcha
+                    
                     $recaptchaSecretKey=self::$config['recaptcha']['secretKey']; 
                     $recaptchaResponse =$this->request->postParam('recaptcha-response','');
-                    */
+                    
                     if($checkEmail===0)
                     {
                         $viewParams['error']['login']=1; 
                         $validation=false;
                     }
-                    /*recaptcha
+                    
                     $url = 'https://www.google.com/recaptcha/api/siteverify';
                     $data = [
                       'secret' => $recaptchaSecretKey,
@@ -516,7 +553,7 @@ class MainController extends AbstractController
                           $validation=false;
                           $viewParams['error']['recaptcha']=1;
                      }
-                    */
+                    
                     if($validation==true)
                     {
                         $chgCode=$this->generateRandomString();
@@ -533,7 +570,8 @@ class MainController extends AbstractController
    }
    
 
-   #metoda wywołujaca odpowiedni moduł do wyswietlenia regulaminu serwisu
+   # [PL] metoda wywołujaca odpowiedni moduł do wyswietlenia regulaminu serwisu
+   # [ENG] Method that invokes the appropriate module to display the website's terms of service
    protected function termsAction():void
    {
         $this->view->render('terms');
@@ -541,7 +579,8 @@ class MainController extends AbstractController
    }
     
 
-   #metoda odpwoeidzalna za uzyskanie informacji o odowiedniej notatce z bazy danych
+   # [PL] metoda odpwoeidzalna za uzyskanie informacji o odowiedniej notatce z bazy danych
+   # [ENG] Method responsible for obtaining information about a specific note from the database
     private function getNote():array
     {
         $noteId=(int)$this->request->getParam('id');
@@ -554,7 +593,9 @@ class MainController extends AbstractController
         return $note;
     }
 
-    # funkcja jest opowiedzalana za generowanie kodów aktywacji i zmiany hasła 
+    # [PL] funkcja jest opowiedzalana za generowanie kodów aktywacji i zmiany hasła
+    # [ENG] Function responsible for generating activation and password change codes
+
     private function generateRandomString($length = 64):string 
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

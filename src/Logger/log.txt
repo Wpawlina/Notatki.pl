@@ -99,3 +99,45 @@ date: 2024-04-29 08:31:02
 message:  Błędne dane logowania wojtek.pawlina3@gmail.com 
 
 ================================
+
+================================
+date: 2024-09-23 07:20:15 
+message:  Błędne dane logowania wojtek.pawlina3@gmail.com 
+
+================================
+
+================================
+date: 2024-09-23 07:35:11 
+message:  Błędne dane logowania wojtek.pawlina3@gmail.com 
+
+================================
+
+================================
+date: 2024-09-23 07:50:47 
+message: Konto o loginie test@gmail.com nie aktywne 
+
+================================
+
+================================
+date: 2024-09-23 07:51:03 
+message: nie znaleziono uzytkownia o loginie moje#Notatki25 
+
+================================
+
+================================
+date: 2024-09-23 08:26:05 
+message:  Błędne dane logowania wojtek.pawlina3@gmail.com 
+
+================================
+
+================================
+date: 2024-09-23 09:48:20 
+message: Nie udało się pobrać notatki 
+
+================================
+
+================================
+date: 2024-09-23 09:48:23 
+message: Nie udało się pobrać notatki 
+
+================================

@@ -77,7 +77,7 @@
                             ?></div> 
                         </li>
                         <li>
-                        <!-- reacaptcha <input type="hidden" name="recaptcha-response" id="recaptcha-response"> -->
+                     <input type="hidden" name="recaptcha-response" id="recaptcha-response"> 
                         <div class="errorMsg">
                             <?php
                             if(isset($params['error']['recaptcha']))
@@ -94,16 +94,16 @@
             Masz już konto? | <a href="index.php?action=searchUser">Zaloguj się!</a>
     </div>
 </div>
- <!-- reacaptcha
+ 
 <script>
 
     var siteKey = '6LcQ9DwoAAAAABAyIdD8FRvKjlip5fRZMNQU01II';
 
     grecaptcha.ready(function() {
+        console.log('ready');
         grecaptcha.execute(siteKey, { action: 'submit_form' }).then(function(token) {
             var recaptchaResponse = document.getElementById('recaptcha-response');
             recaptchaResponse.value = token;
         });
     });
 </script>
--->

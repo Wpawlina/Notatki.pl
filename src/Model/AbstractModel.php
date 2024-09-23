@@ -1,63 +1,52 @@
-<?php 
+<?php
 
 declare(strict_types=1);
 
 namespace APP\Model;
 
-use APP\Exception\AppException;
-use APP\Exception\ConfigurationException;
-use APP\Exception\StorageException;
-use APP\Exception\NotFoundException;
-
 use PDO;
 use PDOException;
-use Throwable;
+use APP\Exception\ConfigurationException;
+use APP\Exception\StorageException;
 
-#klasa abstractModel zawiera podstawowe metody potrzebne do działania kontrolera bazy danych nastepnie jest rozszerzana o wymagane metody przez NoteModel i UserModel
+# [PL] Klasa AbstractModel jest odpowiedzialna za zarządzanie połączeniem z bazą danych
+# [ENG] The AbstractModel class is responsible for managing the database connection
 abstract class AbstractModel
 {
     protected PDO $conn;
-    
-    #konstruktor testuje czy konfiguracja jest poprawna i tworzy połaczenie z bazą danych
+
+    # [PL] Konstruktor tworzy połączenie z bazą danych na podstawie przekazanej konfiguracji
+    # [ENG] The constructor creates a database connection based on the provided configuration
     public function __construct(array $config)
     {
-       try{
         $this->validateConfig($config);
         $this->createConnection($config);
-        }
-        catch(PDOException $e)
-        {
-           
-            throw new StorageException('Connection Error');
-          
-        }
     }
-    #metoda odpowiedzalna za utworzenie i zapisanie w własiwosiciach połaczenia do bazy danych
+
+    # [PL] Metoda odpowiedzialna za utworzenie i zapisanie w właściwościach połączenia do bazy danych
+    # [ENG] Method responsible for creating and saving the database connection in the properties
     private function createConnection(array $config): void
     {
-              
-        $dsn="mysql:dbname={$config['database']};host={$config['host']}";
-        $this->conn=new PDO($dsn,
-                        $config['user'],
-                        $config['password'],
-                        [PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]
-
-        ); 
+        $dsn = "mysql:dbname={$config['database']};host={$config['host']}";
+        $this->conn = new PDO(
+            $dsn,
+            $config['user'],
+            $config['password'],
+            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+        );
     }
 
-    #metoda odpowiedzalna za sprawdzenie poprawnosci konfiguracji
-    private function validateConfig(array $config ) :void
+    # [PL] Metoda odpowiedzialna za sprawdzenie poprawności konfiguracji
+    # [ENG] Method responsible for validating the configuration
+    private function validateConfig(array $config): void
     {
-        if(
+        if (
             empty($config['database'])
-            ||empty($config['host'])
+            || empty($config['host'])
             || empty($config['user'])
-            || empty($config['password']) )
-        {
+            || empty($config['password'])
+        ) {
             throw new ConfigurationException('Storage configuration error');
         }
     }
-
-
-
 }
