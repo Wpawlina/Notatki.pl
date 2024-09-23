@@ -16,7 +16,7 @@ The application is written in PHP without using frameworks, built in the MVC mod
 
 <h2>Setup</h2>
 <h4>Clone repository</h4>
-git clone git@github.com:Wpawlina/Notatki.pl.git
+git clone https://github.com/Wpawlina/Notatki.pl.git
 
 <h4>Start Docker</h4>
 cd Notatki.pl<br/>
