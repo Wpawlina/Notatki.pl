@@ -7,7 +7,7 @@ Notatki.pl is an online application that allows users to create, edit, and manag
 
 <h2>Technologies</h2>
 <ul>
-  <li>Backend: PHP, MySql, MailPit</li>
+  <li>Backend: PHP, MySql, Mailpit</li>
   <li>Frontend: HTML, CSS, JavaScript</li>
   <li>Development Enviroment: PHPStorm, Visual Studio Code</li>
 </ul>
