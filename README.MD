@@ -2,9 +2,7 @@
 <h1>Notatki.pl<h1>
 
 <h2>Overview</h2>
-Project Notatki.pl is an application that offers users an online service for creating notes that are stored on a server and accessible on the internet. After a user creates an account, the service allows them to create, edit, and delete notes belonging to their account. All notes are stored on the server, and the user always has access to all their notes.
-
-The application is written in PHP without using frameworks, built in the MVC model, and follows a monolithic architecture.
+Notatki.pl is an online application that allows users to create, edit, and manage notes stored on a server and accessible from anywhere via the internet. After registering an account, users can securely create, modify, and delete their personal notes, ensuring they always have access to their data. The application is built in PHP without the use of frameworks, following the MVC architecture and a monolithic structure, ensuring simplicity, stability, and ease of maintenance.
 
 
 <h2>Technologies</h2>
