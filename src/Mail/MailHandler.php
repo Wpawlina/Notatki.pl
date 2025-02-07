@@ -30,14 +30,13 @@ class MailHandler
             $this->validateConfig($config);
             $this->mail = new PHPMailer();
             $this->mail->isSMTP();
-            //$this->mail->SMTPDebug = SMTP::DEBUG_SERVER; //wyswitla informacje o komuikacji z serwerem [PL]
-            //$this->mail->SMTPDebug = SMTP::DEBUG_SERVER; //displays information about server communication [ENG]
+
             $this->mail->Host = $config['host'];
             $this->mail->Port = $config['port'];
-            $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-            $this->mail->SMTPAuth = true;
-            $this->mail->Username = $config['user']; 
-            $this->mail->Password = $config['password']; 
+            $this->mail->SMTPSecure = $config['smtpSecure']?? '';
+            $this->mail->SMTPAuth = $config['smtpAuth']?? false;
+            $this->mail->Username = $config['user'] ?? '';
+            $this->mail->Password = $config['password'] ?? '';
             $this->mail->CharSet = $config['charset'];
             $this->mail->setFrom($config['fromMail'], $config['fromName']);
             $this->mail->addReplyTo($config['replyToMail'], $config['replyToName']);
@@ -45,7 +44,7 @@ class MailHandler
         }
         catch(Throwable $e)
         {
-            throw new EmailException('Błąd MailHandler'); // [PL]
+            throw new EmailException('Błąd MailHandler'.$e); // [PL]
             // Error in MailHandler [ENG]
         }
     }
@@ -61,7 +60,7 @@ class MailHandler
             // Thank you for creating an account on Notatki.pl [ENG]
             $this->mail->Body = '
             <html>
-                <body>
+                <div>
                     <h1>Dzień dobry!</h1>
                     <p>Dziekujemy za założenie konta na stronie Notatki.pl
                     </p>
@@ -71,7 +70,7 @@ class MailHandler
                     <hr>
                     <p>Administratorem Twoich danych osobowych jest:</p>
                     <p>Notatki.pl Sp.z.o.o, ul. Wiejska 4/6/8, 00-902 Warszawa</p>
-                </body>
+                </div>
             </html>
 	    	'; // [PL]
             // Email body with activation link and privacy information [ENG]
@@ -100,7 +99,7 @@ class MailHandler
         // Password reset in Notatki.pl service [ENG]
         $this->mail->Body = '
         <html>
-            <body>
+            <div>
                 <h1>Witaj!</h1>
                 <p>To jest link do zmiany hasła na stronie Notatki.pl
                 </p>
@@ -110,7 +109,7 @@ class MailHandler
                 <hr>
                 <p>Administratorem Twoich danych osobowych jest:</p>
                 <p>Notatki.pl Sp.z.o.o, ul. Wiejska 4/6/8, 00-902 Warszawa</p>
-            </body>
+            </div>
         </html>
         '; // [PL]
         // HTML email body with a password reset link [ENG]
@@ -132,14 +131,14 @@ class MailHandler
         // Password change in Notatki.pl service [ENG]
         $this->mail->Body = '
         <html>
-            <body>
+            <div>
                 <h1>Witaj!</h1>
                 <p>Twoje hasło na stronie Notatki.pl zostało włąśnie zmienione
                 </p>
                 <hr>
                 <p>Administratorem Twoich danych osobowych jest:</p>
                 <p>Notatki.pl Sp.z.o.o, ul. Wiejska 4/6/8, 00-902 Warszawa</p>
-            </body>
+            </div>
         </html>
         '; // [PL]
         // HTML email body notifying password change [ENG]
@@ -158,13 +157,13 @@ class MailHandler
         if(
             empty($config['host'])
             || empty($config['port'])
-            || empty($config['user'])
-            || empty($config['password'])
             || empty($config['charset'])
             || empty($config['fromMail'])
             || empty($config['fromName'])
             || empty($config['replyToMail'])
-            || empty($config['replyToName']) )
+            || empty($config['replyToName'])
+
+        )
         {
             throw new ConfigurationException('Email configuration error'); // [PL/ENG]
         }

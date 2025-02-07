@@ -14,16 +14,17 @@ return [
         'pepper'=>'P@1mN7#uLqJ3$Hr5sXe8W2cZoFvY6bGt'
     ],
     'mail'=>[
-        'host'=>'smtp.gmail.com',
-        'port'=>465,
-        'user'=>'pawlina.server@gmail.com',
-        'password'=>'xbtc jeog dumh rwhy',
+        'host'=>'mailpit',
+        'port'=>1025,
+        "smtpSecure"=>'',
+        'smtpAuth'=>false,
+        'user'=>'',
+        'password'=>'',
         'charset'=>'UTF-8',
         'fromMail'=>'no-reply@notatki.pl',
         'fromName'=>'Notatki.pl',
         'replyToMail'=>'obsluga@notatki.pl',
         'replyToName'=>'Obsługa klienta'
-
     ],
     'recaptcha'=>[
         'secretKey'=>'6LcQ9DwoAAAAAKlVZUNymQdQV_G10PyuHBF1nbyQ'

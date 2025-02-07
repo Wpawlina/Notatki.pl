@@ -3,11 +3,21 @@ declare(strict_types=1);
 
 session_start();
 
+use APP\Exception\AppException;
+use APP\Exception\ConfigurationException;
+
+use APP\Request;
+use APP\Controller\AbstractController;
+
+use APP\Controller\MainController;
+use APP\Exception\EmailException;
+use APP\Logger\Logger;
+
 # [PL] wbudowana funkcja spl_autoload_register służy do automatycznego ładowania plików z Klasami, wyszukuje odpowiedni plik po nazwie wywołanej klasy poprzez dostosowanie sciezki dostepu do pliku na jej podstawie
 # [ENG] The built-in function spl_autoload_register is used for automatically loading class files, it searches for the appropriate file by the name of the called class by adjusting the file path based on it
 spl_autoload_register(function(string $classNamespace){
   
-  //dump($classNamespace);
+
    
     $path=str_replace(['\\','APP/'],['/',''],$classNamespace);
     $path='src/'.$path.'.php';
@@ -16,22 +26,12 @@ spl_autoload_register(function(string $classNamespace){
 
 require_once("src/utils/debug.php");
 
-//require_once("src/Controller/NoteController.php");
 
-//require_once("src/request.php");
 
 $config = require_once("config/config.php");
 
-//require_once('src/Exception/AppException.php');
-use APP\Exception\AppException;
-use APP\Exception\ConfigurationException;
-//use Throwable;
-use APP\Request;
-use APP\Controller\AbstractController;
 
-use APP\Controller\MainController;
-use APP\Exception\EmailException;
-use APP\Logger\Logger;
+
 
 $request = new Request($_GET, $_POST, $_SERVER, $_SESSION);
 $logger = new Logger($config['file']);

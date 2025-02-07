@@ -1,4 +1,4 @@
-version: "3"
+
 services:
   php_apache:
     container_name: php_8.2_apache_container
@@ -10,6 +10,7 @@ services:
     networks:
       - projekt_share_network
     depends_on:
+      - mailpit
       - mysql
     volumes:
       - .:/var/www/html
@@ -25,7 +26,7 @@ services:
     volumes:
       - ./data:/docker-entrypoint-initdb.d
     networks:
-      - projekt_share_network 
+      - projekt_share_network
 
   phpmyadmin:
     image: phpmyadmin:5.2.1
@@ -37,7 +38,17 @@ services:
       - PMA_HOST=mysql
       - PMA_PORT=3306
     networks:
-      - projekt_share_network        
+      - projekt_share_network
+
+  mailpit:
+    image: axllent/mailpit
+    container_name: mailpit_container
+    restart: always
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - projekt_share_network
 
 networks:
   projekt_share_network:
