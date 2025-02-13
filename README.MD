@@ -11,7 +11,7 @@ Notatki.pl is an online application that allows users to create, edit, and manag
 
 <h2>Technologies</h2>
 <ul>
-  <li>Backend: PHP, MySql, Gmail SMTP</li>
+  <li>Backend: PHP, MySql, Mailpit</li>
   <li>Frontend: HTML, CSS, JavaScript</li>
   <li>Development Enviroment: PHPStorm, Visual Studio Code</li>
 </ul>
@@ -30,6 +30,8 @@ docker compose up -d
 Proceed to http://127.0.0.1:8081/ and create an account.
 
 For PhpMyAdmin proceed to http://127.0.0.1:8080/ and login as root with password Qwerty12345
+
+For Mailpit proceed to http://127.0.0.1:8025/
 </p>
 
 
