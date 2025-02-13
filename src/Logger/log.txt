@@ -416,3 +416,45 @@ date: 2025-02-07 17:25:09
 message:  Błędne dane logowania wojciech@example.com 
 
 ================================
+
+================================
+date: 2025-02-13 16:30:26 
+message: nie znaleziono uzytkownia o loginie Wojtek.pawlina3@gmail.com 
+
+================================
+
+================================
+date: 2025-02-13 16:30:36 
+message: nie znaleziono uzytkownia o loginie Wojtek.pawlina3@gmail.com 
+
+================================
+
+================================
+date: 2025-02-13 16:31:29 
+message:  Błędne dane logowania test2@gmail.com 
+
+================================
+
+================================
+date: 2025-02-13 16:31:41 
+message:  Błędne dane logowania test3@gmail.com 
+
+================================
+
+================================
+date: 2025-02-13 16:31:57 
+message: Konto o loginie testowanies@gmail.com nie aktywne 
+
+================================
+
+================================
+date: 2025-02-13 16:34:53 
+message: SQLSTATE[HY000] [2002] Connection refused 
+
+================================
+
+================================
+date: 2025-02-13 16:34:55 
+message: SQLSTATE[HY000] [2002] Connection refused 
+
+================================

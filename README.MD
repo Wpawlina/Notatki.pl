@@ -3,6 +3,10 @@
 
 <h2>Overview</h2>
 Notatki.pl is an online application that allows users to create, edit, and manage notes stored on a server and accessible from anywhere via the internet. After registering an account, users can securely create, modify, and delete their personal notes, ensuring they always have access to their data. The application is built in PHP without the use of frameworks, following the MVC architecture and a monolithic structure, ensuring simplicity, stability, and ease of maintenance.
+<img src="images/notatki.gif" width="600" height="400" alt="menu">
+<img src="images/notatki1.png" width="600" height="350" alt="menu">
+<img src="images/notatki2.png" width="600" height="350" alt="menu">
+<img src="images/notatki3.png" width="600" height="350" alt="menu">
 
 
 <h2>Technologies</h2>

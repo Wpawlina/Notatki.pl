@@ -65,7 +65,7 @@ class MailHandler
                     <p>Dziekujemy za założenie konta na stronie Notatki.pl
                     </p>
                     <p>Potwierdz teraz swój email
-                    <a href="http://testwp/~ubuadm/udemy/phptip/projekt_moj/index.php?action=activateUser&actCode='.$createCode.'"><button>Potwierdź!</button></a>
+                    <a href="http://localhost:8081/index.php?action=activateUser&actCode='.$createCode.'"><button>Potwierdź!</button></a>
                     </p>
                     <hr>
                     <p>Administratorem Twoich danych osobowych jest:</p>
@@ -77,7 +77,7 @@ class MailHandler
 
             $this->mail->AltBody = " Dzień dobry! \r\n
             Dziekujemy za założenie konta na stronie Notatki.pl \r\n
-            Potwierdz teraz swój email wchodzac na stronę http://testwp/~ubuadm/udemy/phptip/projekt_moj/index.php?action=activateUser&actCode=$createCode
+            Potwierdz teraz swój email wchodzac na stronę http://localhost:8081/index.php?action=activateUser&actCode=$createCode
             "; // [PL]
             // Plain text version of the email for clients that don't support HTML [ENG]
             $this->mail->send();
@@ -104,7 +104,7 @@ class MailHandler
                 <p>To jest link do zmiany hasła na stronie Notatki.pl
                 </p>
                 <p>Zresetuj swoje hasło
-                <a href="http://testwp/~ubuadm/udemy/phptip/projekt_moj/index.php?action=chgPasswd&chgCode='.$chgCode.'"><button>Resetuj!</button></a>
+                <a href="http://localhost:8081/index.php?action=chgPasswd&chgCode='.$chgCode.'"><button>Resetuj!</button></a>
                 </p>
                 <hr>
                 <p>Administratorem Twoich danych osobowych jest:</p>
@@ -116,7 +116,7 @@ class MailHandler
 
         $this->mail->AltBody = ' Witaj! \r\n
         To jest link do zmiany hasła na stronie Notatki.pl \r\n
-        Zresetuj swoje hasło wchodząc na stronę http://testwp/~ubuadm/udemy/phptip/projekt_moj/index.php?action=chgPasswd&chgCode='.$chgCode
+        Zresetuj swoje hasło wchodząc na stronę http://localhost:8081/index.php?action=chgPasswd&chgCode='.$chgCode
         ; // [PL]
         // Plain text version of the password reset email [ENG]
         $this->mail->send();
